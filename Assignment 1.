@@ -1,0 +1,748 @@
+import time #Returns the current time in seconds since the epoch
+import random #Returns a random floating-point number between 0.0 and 1.0.
+import sys #Provides access to some variables and functions that interact closely with the interpreter
+from collections import Counter # is used to import the Counter class from the collections module 
+def print1(str): #print1 that takes one parameter called str. This parameter is expected to be a string. 
+    for letter in str: #a loop structure that iterates over each character in the string str
+        sys.stdout.write(letter) # is used to print a character directly to the standard output without adding a newline after the output
+        sys.stdout.flush()
+        time.sleep(0.05)# this controlles the speed that the text is writen at
+    print()
+
+# Global variables
+player_name = ""
+last_girl = ""
+
+def start_game(): #beginning of a function definition
+    """Start the game."""
+    print1("Welcome to **The week of**") #print1 prints the text 
+    print ()
+    global player_name #This lets the code remember what the players name is 
+    player_name = input(" What's your name? ") 
+
+    print1(f"Nice to meet you, {player_name}. Let’s introduce you to the club members.")
+    introduce_girls()
+
+def introduce_girls(): #all of the "def ______()" lines indocate what part of the game you are on
+    """Introduce the girls in the club."""
+    print1("\nYou walk into the film club room, where you see three girls sitting and chatting. They notice you and smile.")
+    print1("1. Misa - A shy girl with a love for horror movies. She's known for having a dark sense of humor.")
+    print1("2. Yuki - Energetic and always enthusiastic about action movies. She's often the life of the club.")
+    print1("3. Maki - Quiet and reserved, she’s interested in psychological and surreal films. Her thoughts often seem mysterious.")
+    
+    print1("\nEach girl is working on something related to their favorite genre, and they seem excited to talk to you.")
+    print1(f'{player_name}, who would you like to talk to first?')
+    talk_to_girls()
+
+def talk_to_girls():
+    """Player selects which girl to talk to first."""
+    print1("\nWho would you like to talk to first?")
+    print1("1. Misa")
+    print1("2. Yuki")
+    print1("3. Maki")
+    
+    choice = input("Enter 1, 2, or 3: ")
+    
+    if choice == "1": #the IF is a choice and the ELIF will output if you do not meet the conditions.
+        talk_to_misa()
+    elif choice == "2":
+        talk_to_yuki()
+    elif choice == "3":
+        talk_to_maki()
+    else:# if the input is unreconized the ELSE command will run
+        print1("Invalid choice. Please pick 1, 2, or 3.")
+        talk_to_girls()
+
+def talk_to_misa():
+    """Conversation with Misa."""
+    global last_girl #This lets the game remember which girl you talk to so you can experience the diffrent endings
+    last_girl = "Misa"
+    print1(f'\nMisa shyly looks up at you. "Hi {player_name}, do you like horror movies?"')
+    print1(f'"I’ve always loved the classics. What about you? What’s your favorite horror movie?"')
+    ask_fav_movie("horror")
+
+def talk_to_yuki():
+    """Conversation with Yuki."""
+    global last_girl
+    last_girl = "Yuki"
+    print1(f'\nYuki gives you a big grin. "Hey {player_name}, action movies are my life! Have you ever seen something that really got your adrenaline pumping?"')
+    print1(f'"Come on, tell me your favorite action movie!"')
+    ask_fav_movie("action")
+
+def talk_to_maki():
+    """Conversation with Maki."""
+    global last_girl
+    last_girl = "Maki"
+    print1(f'\nMaki glances at you thoughtfully. "Hello {player_name}. I’ve always been fascinated by the mind. Do you like movies that make you question reality?"')
+    print1(f'"Tell me, what’s your favorite psychological or surreal movie?"')
+    ask_fav_movie("surreal")
+
+def ask_fav_movie(genre):
+    """Ask the player for their favorite movie."""
+    fav_movie = input(f"What's your favorite {genre} movie? ")
+    print1(f"{fav_movie}? Nice choice!")
+    invite_to_watch_movie()
+
+def invite_to_watch_movie():
+    """Invite the player to watch a movie with the girl."""
+    print1("\nThe girl asks if you'd like to watch a movie with her.")
+    choice = input("1. Yes\n2. No\nEnter 1 or 2: ")
+
+    if choice == "1":
+        watch_movie()
+    elif choice == "2":
+        print1("You politely decline and stand back up.")
+        talk_to_girls()
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        invite_to_watch_movie()
+
+def watch_movie():
+    """Player watches the movie with the girl."""
+    print1(f"\nYou and {last_girl} start watching the movie together.")
+    print1(f"{last_girl} gives some commentary throughout the film, explaining different parts.")
+    print1("After the movie, you say your goodbyes and walk home.")
+    
+    walking_sequence()
+
+def walking_sequence():
+    """Walk home and choose the route."""
+    print1("\nOn your way home, you have two options:")
+    print1("1. Take the short way past a creepy house.")
+    print1("2. Take the long way home.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        creepy_house_shortcut()
+    elif choice == "2":
+        safe_home()
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        walking_sequence()
+
+def creepy_house_shortcut():
+    """The player takes the creepy house shortcut."""
+    print1("\nYou decide to take the short way, walking toward the creepy house.")
+    print1("As you approach, you hear a scream coming from inside!")
+    print1("You start running but trip and fall, knocking yourself unconscious.")
+    input("Press Enter to continue...")
+
+    print1("\nYou wake up sometime later, feeling disoriented.")
+    print1("You rush home, feeling an eerie presence following you.")
+
+    end_of_first_day()
+def safe_home():
+    """The player takes the long, safe way home."""
+    print1("\nYou take the long way home and avoid any creepy encounters.")
+    print1("You arrive home safely and feel relieved.")
+    
+    end_of_first_day()
+
+def end_of_first_day():
+    """End of the first day and explore the player's house."""
+    print1("\nYou're now inside your house.")
+    explore_house()
+
+def explore_house():
+    """Explore the player's house before going to bed."""
+    print1("Where do you want to go?")
+    print1("1. Kitchen")
+    print1("2. Living Room")
+    print1("3. Upstairs")
+    print1("4. Basement")
+
+    choice = input("Enter 1, 2, 3, or 4: ")
+    
+    if choice == "1":
+        kitchen()
+    elif choice == "2":
+        living_room()
+    elif choice == "3":
+        upstairs()
+    elif choice == "4":
+        basement()
+    else:
+        print1("Invalid choice. Please pick 1, 2, 3, or 4.")
+        explore_house()
+
+def kitchen():
+    """Explore the kitchen."""
+    print1("\nYou enter the kitchen.")
+    print1("You can:")
+    print1("1. Eat something.")
+    print1("2. Walk back out.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou grab a snack from the fridge.")
+        input("Press Enter to continue...")
+    elif choice == "2":
+        print1("\nYou walk back out of the kitchen.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        kitchen()
+    
+    explore_house()
+
+def living_room():
+    """Explore the living room."""
+    print1("\nYou enter the living room.")
+    print1("You can:")
+    print1("1. Watch TV.")
+    print1("2. Go back.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou sit down and turn on the TV. There's nothing but static.")
+        input("Press Enter to continue...")
+    elif choice == "2":
+        print1("\nYou walk back out of the living room.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        living_room()
+    
+    explore_house()
+
+def upstairs():
+    """Explore upstairs and go to bed."""
+    print1("\nYou head upstairs. The hallway feels eerie.")
+    print1("You can:")
+    print1("1. Go to your room.")
+    print1("2. Go back downstairs.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou enter your room and decide to go to sleep.")
+        input("Press Enter to continue...")
+        morning_routine()  # Start the morning routine
+    elif choice == "2":
+        print1("\nYou walk back downstairs.")
+        explore_house()
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        upstairs()
+
+def basement():
+    """Explore the basement."""
+    print1("\nYou venture into the basement and hear a noise.")
+    print1("You can:")
+    print1("1. Investigate the noise.")
+    print1("2. Go back upstairs.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou cautiously approach the source of the noise.")
+        print1("It’s just a cat, but it scares you for a moment!")
+        input("Press Enter to continue...")
+    elif choice == "2":
+        print1("\nYou quickly decide to go back upstairs.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        basement()
+    
+    explore_house()
+
+def morning_routine():
+    """Morning routine before heading to school."""
+    print1("\nThe sun rises, and you get ready for school.")
+    
+    print1("\nAfter waking up, you can:")
+    print1("1. Go back to sleep for 5 more minutes.")
+    print1("2. Get up and start getting ready.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou snooze your alarm for 5 more minutes.")
+        input("Press Enter to continue...")
+    elif choice == "2":
+        print1("\nYou get up and start your morning routine.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        morning_routine()
+
+    breakfast()
+
+def breakfast():
+    """Breakfast routine."""
+    print1("\nYou head to the kitchen for breakfast.")
+    print1("You can:")
+    print1("1. Eat cereal.")
+    print1("2. Make toast.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou pour yourself a bowl of cereal and enjoy it.")
+    elif choice == "2":
+        print1("\nYou make some toast and eat it quickly.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        breakfast()
+
+    bathroom()
+
+def bathroom():
+    """Bathroom routine."""
+    print1("\nYou head to the bathroom.")
+    print1("You can:")
+    print1("1. Take a shower.")
+    print1("2. Brush your teeth.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou take a refreshing shower.")
+        input("Press Enter to continue...")
+        print1("You brush your teeth after the shower.")
+    elif choice == "2":
+        print1("\nYou brush your teeth.")
+        input("Press Enter to continue...")
+        print1("You take a quick shower afterward.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        bathroom()
+
+    get_dressed()
+    """get dressed."""
+    print1("\nYou head to the kitchen for breakfast.")
+    print1("You can:")
+    print1("1. Eat cereal.")
+    print1("2. Make toast.")
+
+    choice = input("Enter 1 or 2: ")
+    
+    if choice == "1":
+        print1("\nYou pour yourself a bowl of cereal and enjoy it.")
+    elif choice == "2":
+        print1("\nYou make some toast and eat it quickly.")
+    else:
+        print1("Invalid choice. Please pick 1 or 2.")
+        breakfast()
+def get_dressed():
+    """Getting dressed for school."""
+    print1("\nNow you need to get dressed.")
+    print1("What will you wear?")
+    print1("1. Jeans, a grey sweater, and red shoes.")
+    print1("2. Black pants, a black sweater, and white shoes.")
+    print1("3. Sonic the Hedgehog shirt, Mario hat, Mega Man pants, and big red boots.")
+
+    choice = input("Enter 1, 2, or 3: ")
+    
+    if choice == "1":
+        print1("\nYou put on jeans, a grey sweater, and red shoes.")
+    elif choice == "2":
+        print1("\nYou choose black pants, a black sweater, and white shoes.")
+    elif choice == "3":
+        print1("\nYou wear the Sonic the Hedgehog shirt, Mario hat, Mega Man pants, and big red boots.")
+    else:
+        print1("Invalid choice. Please pick 1, 2, or 3.")
+        get_dressed()
+
+    walk_to_school()
+
+def walk_to_school():
+    """Walk to school and encounter the girl."""
+    print1("\nYou walk towards school, excited for the day.")
+    
+    # Encounter the last girl you spoke to
+    print1(f"\nAs you walk, you see {last_girl} ahead of you.")
+    print1(f"You approach {last_girl} and she greets you with a smile.")
+    
+    # Suggest exploring the creepy house
+    explore_creepy_house_suggestion()
+
+def explore_creepy_house_suggestion():
+    """Suggest exploring the creepy house with the girl."""
+    print1(f"\n{last_girl} looks at the creepy house and says, \"It's really scary, but wouldn't it be cool to explore it?\"")
+    
+    if last_girl == "Misa":
+        print1("\"Imagine the things we might find in there!\" she says with a shiver of excitement.")
+    elif last_girl == "Yuki":
+        print1("\"There could be some awesome action scenes waiting for us inside!\" she adds enthusiastically.")
+    elif last_girl == "Maki":
+        print1("\"Maybe we could uncover some hidden truths or mysteries...\" she muses.")
+    
+    choice = input("Would you like to explore the house after school tomorrow? (1. Yes / 2. No): ")
+    
+    if choice == "2":
+        print1(f"{last_girl} pouts a little. \"Come on, {player_name}, it would be fun! Besides, what if there’s something really interesting?\"")
+        choice = input("Okay, will you go? (1. Yes / 2. No): ")
+    
+    if choice == "1":
+        print1("\nYou agree to explore the creepy house after school tomorrow.")
+    else:
+        print1("\nYou stick to your decision and walk to school, feeling a mix of relief and curiosity.")
+    
+    at_school()
+
+def at_school():
+    """You need to choose what class you shound atend today"""
+    print1("What class do you go to?")
+    print1("1. Math class.")
+    print1("2. Gym class.")
+    print1("3. Chemistry.")
+
+    choice = input("Enter 1, 2, or 3: ")
+    
+    if choice == "1":
+        print1("\nYou go to math class and turns out there is a test that you didnt study for! You sit in panic, but you have to pass this test")
+        math_quiz()
+    elif choice == "2":
+        print1("\nYou go to gym class, luckily its a free day so you play doge ball.")
+    elif choice == "3":
+        print1("\nYou go to chemistry class. Its weird, this is the 4th time Mr. White has not showed up this week, but you brush it off and prepair for you text next week")
+    else:
+        print1("Invalid choice. Please pick 1, 2, or 3.")
+        at_school()
+    
+    after_school()
+def math_quiz():
+    """Gives the player a couple of random math questions to solve."""
+    print1("\nYou go to math class, and it turns out there is a test that you didn't study for!")
+    print1("You sit in panic, but you have to pass this test.\n")
+
+    score = 0
+    
+    # First question
+    num1 = random.randint(1, 10) #this code randomly genorates numbers between 1 and 10
+    num2 = random.randint(1, 10)
+    answer1 = num1 + num2 #Just a calc function 
+    print1(f"First question: What is {num1} + {num2}?")
+    response1 = int(input("Your answer: "))
+    if response1 == answer1:
+        print1("Correct!\n")
+        score += 1
+    else:
+        print1(f"Incorrect. The right answer is {answer1}.\n")
+    
+    # Second question
+    num3 = random.randint(5, 15)
+    num4 = random.randint(1, 10)
+    answer2 = num3 - num4
+    print1(f"Second question: What is {num3} - {num4}?")
+    response2 = int(input("Your answer: "))
+    if response2 == answer2:
+        print1("Correct!\n")
+        score += 1
+    else:
+        print1(f"Incorrect. The right answer is {answer2}.\n")
+
+    # Quiz result
+    if score == 2:
+        print1("Great job! You passed the math test!")
+    elif score == 1:
+        print1("You passed, but just barely!")
+    else:
+        print1("You failed the math test. Better luck next time.")
+    
+    after_school()
+def after_school():
+    """Leave school and meet the girl to discuss exploring the creepy house."""
+    print1("\nSchool is over for the day, and you're about to head home.")
+    
+    # Meeting the girl
+    print1(f"As you walk outside, you see {last_girl} waiting for you by the gate.")
+    print1(f"{last_girl} waves and walks up to you.")
+    
+    # Each girl has a different approach to the creepy house plan
+    if last_girl == "Misa":
+        print1(f"\nMisa shyly asks, \"So, {player_name}, are we still going to explore the creepy house tonight?\"")
+        print1("She looks both excited and a little nervous.")
+    elif last_girl == "Yuki":
+        print1(f"\nYuki grins and says, \"Hey {player_name}, you ready to face the creepy house? This is going to be so fun!\"")
+        print1("Her eyes sparkle with excitement.")
+    elif last_girl == "Maki":
+        print1(f"\nMaki quietly approaches you and says, \"I've been thinking, {player_name}, the house might have some... interesting secrets.\"")
+        print1("She gives you a mysterious look, deep in thought.")
+    
+    # Player choice to confirm the plan
+    print1(f"\n{last_girl} looks at you expectantly, waiting for your response.")
+    choice = input("Do you agree to meet up later and explore the house? (1. Yes / 2. No): ")
+
+    if choice == "1":
+        print1(f"\nYou and {last_girl} agree to meet at the creepy house later that night.")
+        print1(f"{last_girl} gives you a smile as she walks off, leaving you to wonder about the night ahead.")
+        plan_set_for_house()
+    else:
+        print1(f"\nYou hesitate, and {last_girl} frowns slightly but nods in understanding.")
+        print1(f"\"Maybe some other time,\" {last_girl} says as she walks away.")
+        print1("You feel a strange sense of relief, but also lingering curiosity.")
+        scaredy_cat_ending()
+
+def plan_set_for_house():
+    """Set up the meeting at the creepy house and transition to night."""
+    print1("\nLater that evening, you get ready to head out.")
+    print1("You feel a mix of excitement and fear as you approach the creepy house at the agreed-upon time.")
+    print1(f"{last_girl} is already waiting for you outside the house, her face lit by the moonlight.")
+    
+    if last_girl == "Misa":
+        print1("Misa gives you a nervous smile. \"Ready?\" she whispers.")
+    elif last_girl == "Yuki":
+        print1("Yuki punches the air. \"This is going to be awesome!\" she exclaims.")
+    elif last_girl == "Maki":
+        print1("Maki tilts her head thoughtfully. \"Shall we begin?\" she asks in her usual calm tone.")
+    
+    # Transition to the exploration of the creepy house (could lead into a dream/demon sequence later)
+    enter_creepy_house()
+
+def scaredy_cat_ending():
+    """End the game with the 'Scaredy Cat Ending' if the player doesn't go to the house."""
+    print1("\n\n==== SCAREDY CAT ENDING ====\n")
+    print1(f"You decided not to go to the creepy house with {last_girl}.")
+    print1(f"Unfortunately, {last_girl} lost respect for you, and you never got to uncover the mysteries of the house.")
+    print1("Life goes on, but you'll always wonder what could have been.")
+    print1("\nGame Over.")
+    start_game()
+
+def enter_creepy_house():
+    """Enter the creepy house with the girl and choose which direction to go."""
+    print1("\nYou and the girl stand at the entrance of the creepy house.")
+    print1("The air feels colder, and the house looms over you with a dark, foreboding presence.")
+    
+    # Reaction of the girl based on who she is
+    if last_girl == "Misa":
+        print1(f"{last_girl} takes a deep breath and whispers, \"I don't like this place...\"")
+    elif last_girl == "Yuki":
+        print1(f"{last_girl} grins. \"This place looks awesome! Let's check it out!\" she says excitedly.")
+    elif last_girl == "Maki":
+        print1(f"{last_girl} stays quiet but her eyes glint with curiosity. \"Let's not waste any time,\" she says calmly.")
+
+    print1(f"\n{last_girl} opens the door, and the two of you step inside.")
+    print1("The floor creaks under your feet, and the air smells musty, like the house has been abandoned for years.")
+
+    # Present choices to the player
+    print1("\nAs you move further in, you come to a fork in the hallway.")
+    print1("To the left, you hear a faint creaking noise, and to the right, there's a distant glow coming from under a door.")
+    print1(f"{last_girl} looks at you and asks, \"Which way should we go?\"")
+
+    # Player choices
+    print1("\n1. Go left.")
+    print1("2. Go right.")
+    print1("3. Suggest splitting up.")
+    
+    choice = input("Enter 1, 2, or 3: ")
+
+    if choice == "1":
+        print1(f"\nYou and {last_girl} decide to go left, moving towards the source of the faint creaking noise.")
+        go_left()
+    elif choice == "2":
+        print1(f"\nYou and {last_girl} decide to go right, curious about the faint glow under the door.")
+        go_right()
+    elif choice == "3":
+        print1(f"\nYou suggest that the two of you split up. {last_girl} hesitates, but eventually agrees.")
+        split_up()
+    else:
+        print1("Invalid choice. Please choose 1, 2, or 3.")
+        enter_creepy_house()
+
+def go_left():
+    """Handle the scenario when the player chooses to go left to the living room."""
+    print1("\nYou and {last_girl} move down the left hallway, following the creaking sound.")
+    print1("At the end of the hallway, you find yourselves in the living room.")
+    print1("The room is large and dimly lit, with old furniture covered in dusty sheets. The air feels heavy, and the atmosphere is eerie.")
+
+    if last_girl == "Misa":
+        print1("Misa clutches your arm, her eyes darting around the room nervously.")
+    elif last_girl == "Yuki":
+        print1("Yuki looks excited as she glances around, taking in the creepy atmosphere.")
+    elif last_girl == "Maki":
+        print1("Maki surveys the room calmly, her expression neutral but alert.")
+
+    print1("In the corner, you notice an old, broken TV, and on the wall, there’s a faded family portrait. The creaking noise continues, seemingly coming from the ceiling.")
+   
+    return_to_entrance()
+def go_right():
+    """Handle the scenario when the player chooses to go right to the kitchen."""
+    print1("\nYou and the girl head down the right hallway toward the door with the faint glow.")
+    print1("The glow leads you to the kitchen, where the flickering light comes from an old chandelier above.")
+    
+    if last_girl == "Misa":
+        print1("Misa stands still for a moment, glancing around nervously. \"I don’t like this place,\" she whispers.")
+    elif last_girl == "Yuki":
+        print1("Yuki walks into the kitchen confidently. \"This is kinda cool!\" she says, her excitement showing.")
+    elif last_girl == "Maki":
+        print1("Maki enters the room cautiously, scanning the area with a calculating gaze.")
+
+    print1("The kitchen is old and dusty, with cracked countertops and broken cabinets. The smell of something rotten lingers in the air.")
+    print1("You notice a rusted knife on the counter and a trail of dried red stains leading toward the pantry door.")
+
+    return_to_entrance()
+
+def split_up():
+    """Handle the scenario when the player suggests splitting up."""
+    print1(f"\nYou suggest splitting up, and {last_girl} pauses for a moment.")
+    
+    if last_girl == "Misa":
+        print1(f"Misa shakes her head. \"I don't know if that's a good idea... but if you think it's best...\" she says nervously.")
+    elif last_girl == "Yuki":
+        print1(f"Yuki laughs. \"Split up? Oh, this is getting fun! I'll take the right side, you take the left!\" she says, full of excitement.")
+    elif last_girl == "Maki":
+        print1(f"Maki nods silently. \"We'll cover more ground that way,\" she says, already moving toward the right hallway.")
+
+    print1(f"\nYou and {last_girl} go your separate ways, disappearing into the dark hallways.")
+
+    return_to_entrance()
+
+def return_to_entrance():
+    """Return to the front entrance after exploring the living room or kitchen."""
+    print1("\nAfter searching the area, you and the girl find nothing but dust and broken furniture.")
+    
+    if last_girl == "Misa":
+        print1(f"Misa sighs, clearly relieved to be leaving the room. \"Can we go now? This place gives me the creeps,\" she says.")
+    elif last_girl == "Yuki":
+        print1(f"Yuki looks disappointed. \"Ugh, nothing interesting here! But there’s gotta be something cool in this house!\"")
+    elif last_girl == "Maki":
+        print1(f"Maki nods, still calm and composed. \"This place is unsettling, but we haven't explored everything yet,\" she says.")
+
+    print1("\nYou both return to the front entrance, standing in the dark foyer.")
+    print1("There is one path in front of you.")
+    print1("A door to the **basement** stands slightly ajar, revealing stairs leading downward.")
+    print1(f"\n{last_girl} looks at you and asks, \"So... what now?\"")
+
+    # Only one option to go downstairs
+    print1("You both head downstairs, as there's no other choice...")
+
+    # Proceed to the basement sequence
+    downstairs()
+
+def downstairs():
+    """Explore the creepy basement and reveal a dark secret, with different endings based on the girl."""
+    print1("\nYou cautiously make your way downstairs, but it’s pitch black.")
+    print1("You fumble around, trying to find a light switch but have no luck at first.")
+    
+    input("Press Enter to continue...")
+
+    # Finding the light switch
+    print1("\nFinally, you manage to find the switch and flick it on.")
+    print1("The light flickers for a moment before revealing a horrifying sight... a man tied up in the corner of the basement!")
+    
+    input("Press Enter to continue...")
+
+    # Reactions from the girl based on who she is
+    if last_girl == "Misa":
+        print1(f"\nMisa gasps in horror. \"Oh my God, what is this?!\" she exclaims, eyes wide in disbelief.")
+    elif last_girl == "Yuki":
+        print1(f"\nYuki seems oddly calm but tense. \"This is... really bad,\" she mutters, her voice tight with fear.")
+    elif last_girl == "Maki":
+        print1(f"\nMaki narrows her eyes. \"I knew something was off about this place,\" she says, her voice cold and steady.")
+
+    print1("You begin to panic, your heart racing as the man looks up at you, pleading with his eyes.")
+    print1("Suddenly, you hear a loud BANG from behind. Before you can react, everything goes black.")
+    
+    input("Press Enter to continue...")
+
+    # Waking up tied to a chain
+    print1("\nWhen you regain consciousness, you realize you're tied to a chain, right beside the man.")
+
+    if last_girl == "Misa":
+        misa_ending()
+    elif last_girl == "Yuki":
+        yuki_ending()
+    elif last_girl == "Maki":
+        maki_ending()
+
+def misa_ending():
+    """Misa's ending: She just wants to play, then kill you."""
+    print1(f"Misa steps out of the shadows, a cruel grin on her face. \"Oh, {player_name}, this is where the fun really begins,\" she teases.")
+    print1("\"You didn’t really think we were just exploring, did you?\"")
+    input("Press Enter to continue...")
+    print1("\"I do this for fun,\" she says, eyes gleaming with excitement.")
+    print1("She giggles and starts pacing around you, playfully kicking at the man tied next to you.")
+    print1("\"Killing, messing with people... it's thrilling, isn’t it?\"")
+    input("Press Enter to continue...")
+    print1("Without warning, she lunges at you. You feel the cold blade, and then... nothing.")
+    print1("You’ve reached **The Misa Ending.**")
+    game_over()
+
+def yuki_ending():
+    """Yuki's dark secret, with the added key search and choice to save the man."""
+    
+    print1(f"Yuki is standing over you, her eyes filled with something dark. \"I told you there was more to this place,\" she says softly.")
+    print1("\"Now you’ll understand what I really meant...\"")
+    input("Press Enter to continue...")
+    print1("\"I need money. Badly,\" she continues, her tone serious.")
+    print1(f"\"Your organs, {player_name}. They're worth a fortune on the black market. I’ll be rich once this is over.\"")
+    input("Press Enter to continue...")
+    print1("She starts walking away. \"I need to grab my tools upstairs. They’re in the fridge, funny enough,\" she says with a chuckle.")
+    print1("\"Don’t go anywhere,\" she adds before heading back upstairs, leaving you alone with the man.")
+    
+    input("Press Enter to continue...")
+    print1("\nThis is your chance! You struggle against your chains, desperately looking for a way to escape.")
+    print1("The door to the basement is locked... but if you can find the key, you might be able to escape before Yuki returns.")
+    input("Press Enter to continue...")
+
+    
+    key_found = False
+    while not key_found:
+        key_found = untie_man_sequence()
+
+
+def untie_man_sequence():
+    print1("\nYou can escape on your own or try to save the man tied up beside you.")
+    save_choice = input("Do you want to untie the man? (yes/no): ").lower()
+
+    if save_choice == "yes":
+        print1("\nYou quickly untie the man, thinking it’s the right thing to do.")
+        print1("But as soon as he's free, his eyes narrow, and a chilling smirk appears on his face.")
+        input("Press Enter to continue...")
+        print1("\"You really thought I was a victim, didn’t you?\" he sneers as he suddenly pulls out a knife.")
+        print1("Before you can react, he stabs you in the side, a sharp pain coursing through your body.")
+        input("Press Enter to continue...")
+        print1("You collapse to the ground, realizing too late that he’s in on it with Yuki.")
+        print1("As darkness overtakes you, you hear footsteps approaching—the sound of Yuki’s return.")
+        print1("You’ve reached **The Bad Yuki Ending.**")
+        game_over()
+    else:
+        print1("\nYou decide not to risk it and leave the man tied up. You know something doesn’t feel right.")
+        print1("With shaky hands, you open the basement door and quietly make your way up the stairs.")
+        input("Press Enter to continue...")
+        print1("The house is eerily silent. You glance around but see no sign of Yuki. Maybe she’s still looking for her tools...")
+        print1("Not wasting any more time, you slip out the front door and bolt down the street, running as fast as you can.")
+        print1("You don’t stop until you’re far away from the house, your heart still racing.")
+        input("Press Enter to continue...")
+        print1("You’ve made it. You’ve escaped the nightmare.")
+        print1("You’ve reached **The True Ending.**")
+        game_over()
+
+def maki_ending():
+    """Maki's ending: She suffocates the man, but you have a chance to fight back."""
+    print1(f"Maki glares at you with unsettling intensity. \"This was inevitable, {player_name},\" she says, almost disappointed.")
+    print1("\"You walked right into the trap.\"")
+    input("Press Enter to continue...")
+    print1("\"I can’t let you leave now,\" she says coldly.")
+    print1("She moves towards the man tied next to you, and without hesitation, she starts suffocating him.")
+    print1("You watch in horror as he struggles, gasping for air, but soon, he goes still.")
+    input("Press Enter to continue...")
+    print1("Maki turns to you, wiping her hands. \"You’re next.\"")
+    
+    input("Press Enter to continue...")
+    print1("\nBut you notice something—she forgot to tie your legs properly in her rush.")
+    print1("With adrenaline surging through you, you kick out hard, your foot lunging into her stomach.")
+    print1("Maki stumbles back, gasping for air. You’ve knocked her down!")
+
+    next_move = input("Do you want to fight her or run for it? (fight/run): ").lower()
+
+    if next_move == "fight":
+        print1("\nYou muster all your strength and kick her again, knocking her unconscious.")
+        print1("Breathing heavily, you free yourself and run upstairs, heart pounding, finally making it out alive.")
+        print1("You’ve survived **The Maki Ending.**")
+    else:
+        print1("\nYou decide to run for it. As Maki struggles to get up, you dash up the stairs and out of the house.")
+        print1("You don’t stop until you're far, far away.")
+        print1("You’ve survived **The Maki Ending.**")
+    game_over()
+
+def game_over():
+    """Simple game over function to wrap up the endings."""
+    print1("\n\n=== GAME OVER ===")
+    input("Press Enter to return to the start of the game.")
+    start_game()
+
+# Start the game
+start_game()
